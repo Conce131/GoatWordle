@@ -1,10 +1,33 @@
 <script>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: 'AIzaSyDwrAZgsIEB17vOqOv_Vd6U_U_74UhqdHo',
+  authDomain: 'goatwordle-53100.firebaseapp.com',
+  projectId: 'goatwordle-53100',
+  storageBucket: 'goatwordle-53100.appspot.com',
+  messagingSenderId: '553346905034',
+  appId: '1:553346905034:web:0786187016b25e7ec01533',
+  measurementId: 'G-Y7N8V59M2D'
+}
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
+const analytics = getAnalytics(app)
+
 export default {
   name: 'Table',
   data() {
     return {
       word: 'granuja',
-      letters: ''
+      letters: '',
+      words: []
     }
   },
   mounted() {
@@ -19,7 +42,7 @@ export default {
       console.log(event)
       const letter = event.target.value.toLowerCase()
       const index = Number(event.target.dataset.index)
-      console.log(`Letra actual: ${letter}, Letra en indice ${index}: 
+      console.log(`Letra actual: ${letter}, Letra en indice ${index}:
       ${this.word[index]}`)
       if (letter === this.word[index].toLowerCase()) {
         event.target.style.backgroundColor = 'green'
