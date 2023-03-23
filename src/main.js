@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
+import Table from './components/Table.vue'
 import './assets/main.css'
 
-createApp(App).mount('#app')
+createApp(App).component('Table', Table).mount('#app')
