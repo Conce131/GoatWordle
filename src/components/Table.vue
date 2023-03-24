@@ -98,8 +98,18 @@ export default {
   padding-left: 0.5em;
 }
 
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30%;
+}
+
 input {
-  width: 1.5vw;
+  width: 4.5vw;
+  height: 4.5vw;
+  font-size: 2rem;
   /* height: 1.5vh; */
 }
 
