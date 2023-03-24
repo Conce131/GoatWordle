@@ -3,26 +3,25 @@
  */
 
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, set } from 'firebase/database'
+import { getFirestore, addDoc, collection } from 'firebase/firestore'
 import 'dotenv/config'
 import * as fs from 'fs'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDwrAZgsIEB17vOqOv_Vd6U_U_74UhqdHo',
-  authDomain: 'goatwordle-53100.firebaseapp.com',
-  projectId: 'goatwordle-53100',
-  storageBucket: 'goatwordle-53100.appspot.com',
-  messagingSenderId: '553346905034',
-  appId: '1:553346905034:web:0786187016b25e7ec01533',
-  measurementId: 'G-Y7N8V59M2D'
-}
+  apiKey: "AIzaSyAXjttzlgRSGkOMRuyQqzY0gzYwb3nL2kg",
+  authDomain: "name-c783b.firebaseapp.com",
+  projectId: "name-c783b",
+  storageBucket: "name-c783b.appspot.com",
+  messagingSenderId: "650828303978",
+  appId: "1:650828303978:web:282d0ef8128ba6b2e94413"
+};
 
 const app = initializeApp(firebaseConfig)
-const db = getDatabase(app)
+const db = getFirestore(app)
 
 let data = null
 
-fs.readFile('palabras.json', 'utf8', (err, response) => {
+fs.readFile('palabras.json', 'utf8', async (err, response) => {
   if (err) {
     console.error(err)
     return
@@ -32,8 +31,12 @@ fs.readFile('palabras.json', 'utf8', (err, response) => {
   data = JSON.parse(response)
   // data = data.palabras
 
+  const collectionRef = collection(db, 'palabras')
+
   for (const palabras of data) {
     let palabra = palabras.palabra
-    set(ref(db, 'palabras/' + palabra), palabras)
+    console.log(palabra)
+    const docRef = await addDoc(collectionRef, palabras)
+    console.log(docRef)
   }
 })
